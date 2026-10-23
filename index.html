@@ -2,1438 +2,279 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-<title>To the Most Beautiful Girl in My World ❤️</title>
-
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fff0f6">
+<title>A Little Love Note 💗</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700&family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
 <style>
-
-/* =====================================================
-   GLOBAL
-===================================================== */
-
-:root{
-    --pink:#ff4f9a;
-    --purple:#9b5cff;
-    --blue:#4f8cff;
-    --red:#ff4d6d;
-    --text-dark:#333;
-    --glass-bg:rgba(255,255,255,.15);
-    --glass-border:rgba(255,255,255,.3);
-}
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    scroll-behavior:smooth;
-}
-
-html{
-    width:100%;
-    min-height:100%;
-}
-
-body{
-    font-family:"DM Sans",sans-serif;
-    overflow-x:hidden;
-    background:#08000f;
-    -webkit-tap-highlight-color:transparent;
-}
-
-button,
-a{
-    -webkit-tap-highlight-color:transparent;
-}
-
-/* =====================================================
-   TIMER SCREEN
-===================================================== */
-#timer-screen {
-    position: fixed;
-    inset: 0;
-    background: #08000f;
-    background-image: 
-        radial-gradient(circle at 10% 20%, rgba(255,79,154,.15), transparent 40%),
-        radial-gradient(circle at 90% 80%, rgba(79,140,255,.15), transparent 40%);
-    z-index: 10000;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    text-align: center;
-    padding: 20px;
-}
-
-#timer-screen h1 {
-    font-family: "Playfair Display", serif;
-    font-size: clamp(2rem, 6vw, 3.5rem);
-    margin-bottom: 10px;
-    background: linear-gradient(90deg, #ff5ca8, #fff, #9dbdff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-#timer-screen p {
-    font-size: clamp(1rem, 3vw, 1.2rem);
-    color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 40px;
-}
-
-.timer-box {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.timer-item {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    padding: 20px;
-    border-radius: 15px;
-    min-width: 90px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-}
-
-.timer-item span {
-    display: block;
-    font-size: 2.5rem;
-    font-weight: 700;
-    font-family: "Poppins", sans-serif;
-    color: #ff4d6d;
-    line-height: 1;
-    margin-bottom: 5px;
-}
-
-.timer-item label {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: rgba(255, 255, 255, 0.6);
-}
-
-
-/* =====================================================
-   INTRO
-===================================================== */
-
-#intro-flow{
-    position:fixed;
-    inset:0;
-    color:white;
-    background:
-        radial-gradient(circle at 20% 20%,rgba(255,79,154,.30),transparent 30%),
-        radial-gradient(circle at 80% 25%,rgba(79,140,255,.25),transparent 30%),
-        radial-gradient(circle at 50% 90%,rgba(155,92,255,.28),transparent 35%);
-    z-index:999;
-    overflow:hidden;
-    display: none; /* Hidden until timer finishes */
-}
-
-.bg-orbs{
-    position:absolute;
-    inset:0;
-    pointer-events:none;
-}
-
-.orb{
-    position:absolute;
-    border-radius:50%;
-    filter:blur(60px);
-    animation:orbFloat 8s ease-in-out infinite;
-}
-
-.orb1{
-    width:250px;
-    height:250px;
-    background:rgba(255,79,154,.25);
-    top:5%;
-    left:5%;
-}
-
-.orb2{
-    width:280px;
-    height:280px;
-    background:rgba(79,140,255,.20);
-    right:-10%;
-    top:30%;
-    animation-delay:2s;
-}
-
-.orb3{
-    width:200px;
-    height:200px;
-    background:rgba(155,92,255,.25);
-    bottom:-5%;
-    left:20%;
-    animation-delay:4s;
-}
-
-@keyframes orbFloat{
-    0%,100%{
-        transform:translate(0,0) scale(1);
-    }
-
-    50%{
-        transform:translate(20px,-20px) scale(1.1);
-    }
-}
-
-.screen{
-    position:absolute;
-    inset:0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:25px;
-    opacity:0;
-    visibility:hidden;
-    transform:scale(.96) translateY(15px);
-    transition:
-        opacity .8s ease,
-        transform .8s ease,
-        visibility .8s;
-}
-
-.screen.active{
-    opacity:1;
-    visibility:visible;
-    transform:scale(1) translateY(0);
-}
-
-.content{
-    width:100%;
-    max-width:600px;
-    margin:auto;
-}
-
-.small-title{
-    font-size:clamp(12px,3vw,14px);
-    letter-spacing:3px;
-    text-transform:uppercase;
-    color:rgba(255,255,255,.6);
-    margin-bottom:20px;
-}
-
-.playfair{
-    font-family:"Playfair Display",serif;
-}
-
-.intro-title{
-    font-family:"Playfair Display",serif;
-    font-size:clamp(60px,15vw,100px);
-    line-height:1;
-    background:linear-gradient(
-        90deg,
-        #ff5ca8,
-        #fff,
-        #9dbdff,
-        #c080ff
-    );
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    filter:drop-shadow(0 0 20px rgba(255,79,154,.3));
-}
-
-.name{
-    font-family:"Playfair Display",serif;
-    font-size:clamp(45px,12vw,80px);
-    background:linear-gradient(
-        90deg,
-        #ff65ad,
-        #fff,
-        #a48aff
-    );
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-}
-
-.message{
-    font-size:clamp(15px,4vw,18px);
-    line-height:1.8;
-    color:rgba(255,255,255,.8);
-    margin-top:25px;
-}
-
-.glass-card{
-    padding:35px 25px;
-    border-radius:25px;
-    background:rgba(255,255,255,.07);
-    border:1px solid rgba(255,255,255,.14);
-    backdrop-filter:blur(20px);
-    -webkit-backdrop-filter:blur(20px);
-    box-shadow:0 30px 80px rgba(0,0,0,.4);
-}
-
-.glass-card h2{
-    font-size:clamp(28px,8vw,45px);
-    margin-bottom:15px;
-}
-
-.glass-card p{
-    font-size:clamp(14px,3.5vw,16px);
-    color:rgba(255,255,255,.75);
-    line-height:1.8;
-}
-
-.gif-box{
-    width:100%;
-    max-width:300px;
-    height:220px;
-    margin:25px auto;
-    border-radius:20px;
-    overflow:hidden;
-    border:1px solid rgba(255,255,255,.18);
-    box-shadow:0 15px 50px rgba(255,79,154,.2);
-}
-
-.gif-box img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-.highlight{
-    color:#ff79b7;
-    font-weight:600;
-}
-
-
-/* =====================================================
-   INTRO BUTTONS
-===================================================== */
-
-.buttons{
-    display:flex;
-    flex-direction:column;
-    gap:15px;
-    margin-top:30px;
-    position:relative;
-}
-
-.intro-btn{
-    border:none;
-    padding:15px;
-    border-radius:50px;
-    font-size:16px;
-    font-weight:700;
-    cursor:pointer;
-    transition:transform .2s;
-    width:100%;
-    z-index: 10;
-}
-
-.intro-btn.yes{
-    color:white;
-    background:linear-gradient(
-        135deg,
-        #ff4f9a,
-        #985cff
-    );
-    box-shadow:0 8px 25px rgba(255,79,154,.4);
-}
-
-.intro-btn.no{
-    color:white;
-    background:rgba(255,255,255,.1);
-    border:1px solid rgba(255,255,255,.2);
-    position:relative;
-}
-
-.intro-btn:active{
-    transform:scale(.95);
-}
-
-
-/* =====================================================
-   FLOATING HEARTS
-===================================================== */
-
-.heart-float{
-    position:fixed;
-    bottom:-30px;
-    pointer-events:none;
-    animation:rise linear forwards;
-    z-index:1000;
-}
-
-@keyframes rise{
-    0%{
-        transform:
-            translateY(0)
-            scale(.5)
-            rotate(0deg);
-        opacity:0;
-    }
-    15%{
-        opacity:1;
-    }
-    100%{
-        transform:
-            translateY(-110vh)
-            translateX(var(--move))
-            scale(1.3)
-            rotate(360deg);
-        opacity:0;
-    }
-}
-
-
-/* =====================================================
-   MAIN FLOW
-===================================================== */
-
-#main-flow{
-    display:none;
-    width:100%;
-    background:
-        linear-gradient(
-            -45deg,
-            #ff9a9e,
-            #fecfef,
-            #a1c4fd,
-            #c2e9fb
-        );
-    background-size:400% 400%;
-    animation:aurora 15s ease infinite;
-    color:var(--text-dark);
-    font-family:"Poppins",sans-serif;
-    position:relative;
-}
-
-@keyframes aurora{
-    0%{
-        background-position:0% 50%;
-    }
-    50%{
-        background-position:100% 50%;
-    }
-    100%{
-        background-position:0% 50%;
-    }
-}
-
-@keyframes pulse-heart{
-    0%{
-        transform:scale(1);
-    }
-    50%{
-        transform:scale(1.1);
-    }
-    100%{
-        transform:scale(1);
-    }
-}
-
-.main-section{
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    padding:4rem 1.5rem;
-    position:relative;
-    z-index:2;
-    text-align:center;
-}
-
-.main-glass{
-    background:var(--glass-bg);
-    backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);
-    border:1px solid var(--glass-border);
-    border-radius:20px;
-    padding:2rem 1.5rem;
-    box-shadow:
-        0 8px 32px 0 rgba(31,38,135,.2);
-    width:100%;
-    max-width:650px;
-}
-
-.main-btn{
-    background:linear-gradient(
-        45deg,
-        #ff4d6d,
-        #ff758c
-    );
-    color:white;
-    border:none;
-    padding:15px 30px;
-    font-size:clamp(1.1rem,5vw,1.5rem);
-    border-radius:50px;
-    cursor:pointer;
-    font-family:"Dancing Script",cursive;
-    text-decoration:none;
-    display:inline-block;
-    margin-top:2rem;
-    box-shadow:
-        0 4px 15px rgba(255,77,109,.4);
-    transition:.3s;
-}
-
-.main-btn:hover{
-    transform:translateY(-3px) scale(1.03);
-}
-
-.main-btn:active{
-    transform:scale(.95);
-}
-
-.typewriter-text{
-    display:inline-block;
-    overflow:hidden;
-    white-space:pre-wrap;
-    border-right:.15em solid #ff4d6d;
-    margin:0 auto;
-    font-size:clamp(1rem,4vw,1.3rem);
-    line-height:1.8;
-}
-
-.cursive{
-    font-family:"Dancing Script",cursive;
-}
-
-
-/* =====================================================
-   BEAUTY
-===================================================== */
-
-#beauty .cards-container{
-    display:flex;
-    flex-direction:column;
-    gap:1rem;
-    margin-top:1.5rem;
-    width:100%;
-}
-
-.beauty-card{
-    padding:1.2rem;
-    border-radius:15px;
-    background:rgba(255,255,255,.4);
-}
-
-.beauty-card h3{
-    font-size:1.8rem;
-    color:#ff4d6d;
-}
-
-.beauty-card p{
-    font-size:.9rem;
-    margin-top:5px;
-}
-
-
-/* =====================================================
-   VOICE / SINGING
-===================================================== */
-
-#voice,
-#singing{
-    background:
-        linear-gradient(
-            rgba(0,0,0,.6),
-            rgba(0,0,0,.6)
-        );
-    color:white;
-}
-
-.music-notes{
-    font-size:2.5rem;
-    animation:float 3s infinite ease-in-out;
-}
-
-.neon-text{
-    text-shadow:
-        0 0 10px #ffb6c1,
-        0 0 20px #ffb6c1;
-}
-
-@keyframes float{
-    0%,100%{
-        transform:translateY(0);
-    }
-    50%{
-        transform:translateY(-15px);
-    }
-}
-
-
-/* =====================================================
-   LITTLE THINGS
-===================================================== */
-
-.flip-container{
-    display:flex;
-    flex-direction:column;
-    gap:15px;
-    width:100%;
-    max-width:650px;
-    margin-top:2rem;
-}
-
-.flip-card{
-    height:100px;
-    perspective:1000px;
-    cursor:pointer;
-    background-color:transparent;
-}
-
-.flip-card-inner{
-    position:relative;
-    width:100%;
-    height:100%;
-    text-align:center;
-    transition:transform .6s;
-    transform-style:preserve-3d;
-}
-
-.flip-card:active .flip-card-inner,
-.flip-card.flipped .flip-card-inner{
-    transform:rotateY(180deg);
-}
-
-.flip-card-front,
-.flip-card-back{
-    position:absolute;
-    width:100%;
-    height:100%;
-    backface-visibility:hidden;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:15px;
-    font-size:1rem;
-    font-weight:600;
-    padding:10px;
-}
-
-.flip-card-front{
-    background:rgba(255,255,255,.8);
-    color:#ff4d6d;
-    box-shadow:0 4px 10px rgba(0,0,0,.1);
-}
-
-.flip-card-back{
-    background:#ff4d6d;
-    color:white;
-    transform:rotateY(180deg);
-}
-
-
-/* =====================================================
-   REASONS
-===================================================== */
-
-.counter-box{
-    font-size:clamp(
-        2.5rem,
-        8vw,
-        4rem
-    );
-    font-weight:bold;
-    color:#ff4d6d;
-    margin:1.5rem 0;
-    cursor:pointer;
-    user-select:none;
-}
-
-
-/* =====================================================
-   LETTER
-===================================================== */
-
-#letter .envelope{
-    font-size:80px;
-    cursor:pointer;
-    animation:pulse-heart 2s infinite;
-    user-select:none;
-}
-
-.letter-content{
-    display:none;
-    margin-top:1.5rem;
-    font-size:1.1rem;
-    line-height:1.6;
-    text-align:left;
-    background:rgba(255,255,255,.9);
-}
-
-
-/* =====================================================
-   INTERACTIVE HEART
-===================================================== */
-
-#interactive-heart .big-heart{
-    font-size:100px;
-    cursor:pointer;
-    user-select:none;
-    transition:transform .1s;
-}
-
-#interactive-heart .big-heart:active{
-    transform:scale(.8);
-}
-
-.heart-text{
-    font-size:clamp(
-        2rem,
-        6vw,
-        3rem
-    );
-    margin-top:1rem;
-    height:50px;
-    color:#ff4d6d;
-}
-
-
-/* =====================================================
-   FINAL SCENE
-===================================================== */
-
-#final-scene{
-    background:#020111;
-    color:white;
-    position:relative;
-    overflow:hidden;
-}
-
-.glowing-sentence{
-    font-size:clamp(
-        2.3rem,
-        8vw,
-        4rem
-    );
-    opacity:0;
-    transform:translateY(30px);
-    transition:all 2s ease;
-    line-height:1.2;
-}
-
-.glowing-sentence.visible{
-    opacity:1;
-    transform:translateY(0);
-    text-shadow:
-        0 0 15px #fff,
-        0 0 25px #ff4d6d;
-}
-
-.night-sky{
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    z-index:0;
-}
-
-.moon-glow{
-    position:absolute;
-    top:10%;
-    right:15%;
-    width:80px;
-    height:80px;
-    background:#fff;
-    border-radius:50%;
-    box-shadow:
-        0 0 30px #fff,
-        0 0 60px #e6e6fa;
-    animation:float 6s ease-in-out infinite;
-}
-
-.css-star{
-    position:absolute;
-    background:#fff;
-    border-radius:50%;
-    animation:
-        twinkle
-        var(--duration)
-        infinite
-        ease-in-out
-        alternate;
-}
-
-@keyframes twinkle{
-    0%{
-        opacity:.2;
-        transform:scale(.8);
-    }
-    100%{
-        opacity:1;
-        transform:scale(1.2);
-    }
-}
-
-
-/* =====================================================
-   FINAL WHATSAPP AREA
-===================================================== */
-
-.final-message{
-    margin-top:35px;
-    padding:20px;
-    max-width:600px;
-}
-
-.final-message p{
-    font-family:"Dancing Script",cursive;
-    font-size:clamp(
-        1.3rem,
-        5vw,
-        1.8rem
-    );
-    line-height:1.7;
-    color:rgba(255,255,255,.9);
-}
-
-.whatsapp-btn{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    gap:10px;
-    margin-top:22px;
-    padding:15px 28px;
-    border-radius:50px;
-    background:linear-gradient(
-        135deg,
-        #25D366,
-        #128C7E
-    );
-    color:white;
-    text-decoration:none;
-    font-weight:700;
-    font-size:1rem;
-    box-shadow:
-        0 8px 30px rgba(37,211,102,.35);
-    transition:.3s;
-    position: relative;
-    z-index: 20;
-}
-
-.whatsapp-btn:hover{
-    transform:translateY(-3px) scale(1.03);
-}
-
-.whatsapp-btn:active{
-    transform:scale(.95);
-}
-
-
-/* =====================================================
-   PARTICLES
-===================================================== */
-
-#particles-container{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    pointer-events:none;
-    z-index:1;
-}
-
-.petal{
-    position:absolute;
-    font-size:20px;
-}
-
-.firefly{
-    position:absolute;
-    border-radius:50%;
-    background:
-        radial-gradient(
-            circle,
-            #fff,
-            #ffdf00,
-            transparent
-        );
-    box-shadow:0 0 8px #ffdf00;
-}
-
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media(max-width:600px){
-    .timer-item {
-        min-width: 70px;
-        padding: 15px;
-    }
-    .timer-item span {
-        font-size: 2rem;
-    }
-    .main-section{
-        padding:3rem 1rem;
-    }
-    .glass-card{
-        padding:28px 18px;
-    }
-    .gif-box{
-        height:190px;
-    }
-    .moon-glow{
-        width:60px;
-        height:60px;
-        right:10%;
-    }
-    .final-message{
-        padding:10px;
-    }
-    .whatsapp-btn{
-        width:100%;
-        max-width:320px;
-    }
-}
-
+:root{--pink:#ff5c9a;--rose:#ff4d6d;--purple:#9b5cff;--ink:#38283b;--glass:rgba(255,255,255,.68);--border:rgba(255,255,255,.78)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"DM Sans",sans-serif;overflow-x:hidden;background:#fff0f6;color:var(--ink);-webkit-tap-highlight-color:transparent}
+button,a{font:inherit;-webkit-tap-highlight-color:transparent}
+button:focus-visible,a:focus-visible{outline:3px solid #9b5cff;outline-offset:4px}
+.cursive{font-family:"Dancing Script",cursive}
+.serif{font-family:"Playfair Display",serif}
+#timer-screen{position:fixed;inset:0;z-index:10000;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;color:white;background:radial-gradient(circle at 15% 15%,#663b78 0,transparent 35%),radial-gradient(circle at 85% 85%,#7d315c 0,transparent 35%),#160d24}
+#timer-screen h1{font:700 clamp(2rem,7vw,3.6rem) "Playfair Display",serif;background:linear-gradient(90deg,#ff9bc7,#fff,#c9b8ff);background-clip:text;color:transparent;margin-bottom:12px}
+#timer-screen p{color:#f3dfea;line-height:1.7;margin-bottom:28px}
+.timer-box{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.timer-item{min-width:75px;padding:15px 12px;border:1px solid #ffffff30;border-radius:18px;background:#ffffff12;backdrop-filter:blur(12px)}
+.timer-item span{display:block;font:700 clamp(1.6rem,6vw,2.5rem) Poppins;color:#ff91bd}
+.timer-item label{font-size:.72rem;letter-spacing:1.5px;color:#eadce9;text-transform:uppercase}
+#intro-flow{display:none;position:fixed;inset:0;z-index:999;overflow:hidden;color:white;background:radial-gradient(circle at 15% 20%,#6b2858,transparent 35%),radial-gradient(circle at 85% 75%,#3a2b75,transparent 38%),#130d20}
+.orb{position:absolute;border-radius:50%;filter:blur(55px);opacity:.45;pointer-events:none;animation:float 9s ease-in-out infinite}
+.orb.one{width:220px;height:220px;background:#ff5c9a;left:4%;top:8%}.orb.two{width:270px;height:270px;background:#7b6bff;right:-8%;top:35%;animation-delay:2s}.orb.three{width:180px;height:180px;background:#ffb3d5;bottom:-4%;left:25%;animation-delay:4s}
+.screen{position:absolute;inset:0;display:grid;place-items:center;padding:22px;text-align:center;opacity:0;visibility:hidden;transform:translateY(14px) scale(.98);transition:opacity .65s,transform .65s,visibility .65s}
+.screen.active{opacity:1;visibility:visible;transform:none}
+.content{width:min(100%,620px);margin:auto}
+.kicker{text-transform:uppercase;letter-spacing:2.5px;font-size:.75rem;color:#f7cfe4;margin-bottom:16px}
+.intro-title{font:700 clamp(3.5rem,15vw,6.5rem)/1 "Playfair Display",serif;background:linear-gradient(90deg,#ff8fc3,#fff,#c7b4ff);background-clip:text;color:transparent;filter:drop-shadow(0 0 18px #ff5c9a55)}
+.name{font:700 clamp(3rem,13vw,5.8rem) "Playfair Display",serif;background:linear-gradient(90deg,#ff8fc3,#fff,#c7b4ff);background-clip:text;color:transparent}
+.message{font-size:clamp(1rem,4vw,1.15rem);line-height:1.8;color:#f4eaf3;margin-top:22px}
+.glass-card{padding:clamp(22px,5vw,38px);border:1px solid #ffffff30;border-radius:28px;background:#ffffff12;backdrop-filter:blur(18px);box-shadow:0 24px 70px #0003}
+.glass-card h2{font:700 clamp(1.8rem,7vw,2.8rem) "Playfair Display",serif;margin:10px 0 14px}
+.glass-card p{line-height:1.85;color:#f6eaf2}
+.highlight{color:#ff9bc7;font-weight:700}
+.gif-box{width:min(100%,300px);height:190px;margin:22px auto;border-radius:22px;overflow:hidden;border:1px solid #ffffff35;box-shadow:0 12px 35px #ff5c9a30}
+.gif-box img{width:100%;height:100%;object-fit:cover}
+.buttons{display:grid;gap:12px;margin-top:24px}
+.intro-btn{width:100%;min-height:52px;border:0;border-radius:50px;padding:14px 20px;font-weight:700;cursor:pointer;transition:transform .2s,filter .2s}
+.intro-btn:active{transform:scale(.97)}
+.yes{color:white;background:linear-gradient(135deg,#ff5c9a,#9b5cff);box-shadow:0 10px 25px #ff5c9a45}
+.no{color:white;background:#ffffff12;border:1px solid #ffffff30;position:relative}
+#main-flow{display:none;background:linear-gradient(135deg,#ffe0ec,#e9e2ff,#dff4ff,#fff1d9);background-size:350% 350%;animation:gradient 18s ease infinite}
+.main-section{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:clamp(50px,9vh,100px) 18px;position:relative}
+.main-glass{width:min(100%,680px);padding:clamp(22px,5vw,38px);border:1px solid var(--border);border-radius:28px;background:var(--glass);backdrop-filter:blur(14px);box-shadow:0 18px 55px #6b4d7720}
+.main-btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:14px 26px;margin-top:24px;border:0;border-radius:50px;color:white;text-decoration:none;font-weight:700;background:linear-gradient(135deg,#ff4d6d,#ff8ab1);box-shadow:0 8px 25px #ff4d6d40;cursor:pointer;transition:transform .2s}
+.main-btn:active{transform:scale(.96)}
+.hero-title{font:700 clamp(2.5rem,9vw,4.6rem)/1.15 "Playfair Display",serif;color:#d6336c;margin-bottom:18px}
+.cursive-title{font:700 clamp(2.5rem,8vw,3.7rem) "Dancing Script",cursive;color:#d6336c;margin-bottom:18px}
+.typewriter-text{display:block;white-space:pre-wrap;overflow-wrap:anywhere;border-right:2px solid #ff4d6d;line-height:1.8;font-size:clamp(1rem,4vw,1.2rem);text-align:left}
+.cards-container,.flip-container{display:grid;gap:12px;margin-top:22px;width:100%}
+.beauty-card{padding:18px;border-radius:18px;background:#ffffff80;text-align:left}
+.beauty-card h3{font:700 1.7rem "Dancing Script",cursive;color:#d6336c}.beauty-card p{font-size:.95rem;line-height:1.6;margin-top:5px}
+#voice,#singing{background:linear-gradient(135deg,#3a244a,#241a3e);color:white}
+.music-notes{font-size:2.5rem;animation:float 3s ease-in-out infinite}
+.neon-text{text-shadow:0 0 12px #ffb6c1,0 0 24px #ffb6c1}
+.flip-card{height:105px;perspective:1000px;cursor:pointer}
+.flip-card-inner{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+.flip-card.flipped .flip-card-inner{transform:rotateY(180deg)}
+.flip-card-front,.flip-card-back{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:14px;border-radius:18px;backface-visibility:hidden;font-weight:700}
+.flip-card-front{background:#ffffffbd;color:#d6336c}.flip-card-back{background:#ff5c9a;color:white;transform:rotateY(180deg)}
+.counter-box{font:700 clamp(2.5rem,8vw,4rem) Poppins;color:#d6336c;margin:18px 0;cursor:pointer}
+#reason-text{font-weight:600;cursor:pointer;line-height:1.7}
+.envelope{font-size:clamp(4rem,18vw,6rem);cursor:pointer;animation:pulse 2s infinite}
+.letter-content{display:none;margin-top:22px;text-align:left;line-height:1.8;background:#ffffffbd;border-radius:20px;padding:22px;font-size:1.1rem}
+.big-heart{font-size:clamp(5rem,22vw,8rem);cursor:pointer;user-select:none;transition:transform .15s}.big-heart:active{transform:scale(.82)}
+.heart-text{font:700 clamp(1.8rem,6vw,3rem) "Dancing Script",cursive;color:#d6336c;margin-top:12px;min-height:55px}
+#final-scene{background:#100d24;color:white;overflow:hidden}
+.night-sky{position:absolute;inset:0;pointer-events:none}.moon-glow{position:absolute;right:12%;top:10%;width:65px;height:65px;border-radius:50%;background:#fff;box-shadow:0 0 30px #fff,0 0 65px #d7cfff}
+.css-star{position:absolute;background:white;border-radius:50%;animation:twinkle var(--duration) infinite alternate ease-in-out}
+.final-content{position:relative;z-index:2;width:min(100%,720px)}
+.glowing-sentence{opacity:0;transform:translateY(22px);transition:all 1.4s;line-height:1.25;font:700 clamp(2rem,7vw,4rem) "Dancing Script",cursive}
+.glowing-sentence.visible{opacity:1;transform:none;text-shadow:0 0 16px #fff,0 0 28px #ff4d6d}
+.final-message{margin-top:28px;padding:12px}.final-message p{font:600 clamp(1.25rem,5vw,1.8rem)/1.65 "Dancing Script",cursive;color:#f9eaf3}
+.whatsapp-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:20px;padding:15px 24px;border-radius:50px;background:linear-gradient(135deg,#25d366,#128c7e);color:white;text-decoration:none;font-weight:700;max-width:100%;box-shadow:0 8px 25px #25d36635}
+#particles-container{position:fixed;inset:0;pointer-events:none;z-index:1000}
+.heart-float{position:absolute;bottom:-30px;animation:rise var(--duration) linear forwards;pointer-events:none}
+@keyframes rise{to{transform:translateY(-110vh) translateX(var(--move)) rotate(300deg);opacity:0}}
+@keyframes float{50%{transform:translateY(-14px)}}
+@keyframes pulse{50%{transform:scale(1.08)}}
+@keyframes twinkle{to{opacity:1;transform:scale(1.25)}}
+@keyframes gradient{50%{background-position:100% 50%}}
+@media(min-width:650px){.cards-container{grid-template-columns:repeat(3,1fr)}.flip-container{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.timer-item{min-width:64px;padding:12px 8px}.main-section{padding:55px 14px}.glass-card{padding:22px 16px}.gif-box{height:170px}.whatsapp-btn{width:100%}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
 </style>
 </head>
-
 <body>
-
-<div id="timer-screen">
-    <h1 class="playfair">A Special Surprise Awaits...</h1>
-    <p>This page will unlock on September 30, 2026 at 11:59 PM.</p>
-    
-    <div class="timer-box">
-        <div class="timer-item">
-            <span id="days">00</span>
-            <label>Days</label>
-        </div>
-        <div class="timer-item">
-            <span id="hours">00</span>
-            <label>Hrs</label>
-        </div>
-        <div class="timer-item">
-            <span id="minutes">00</span>
-            <label>Min</label>
-        </div>
-        <div class="timer-item">
-            <span id="seconds">00</span>
-            <label>Sec</label>
-        </div>
-    </div>
+<div id="timer-screen" aria-live="polite">
+  <h1>A tiny surprise is waiting… 💗</h1>
+  <p id="timer-caption">This little page unlocks on September 30, 2026 at 11:59 PM.</p>
+  <div class="timer-box" aria-label="Countdown">
+    <div class="timer-item"><span id="days">00</span><label>Days</label></div>
+    <div class="timer-item"><span id="hours">00</span><label>Hours</label></div>
+    <div class="timer-item"><span id="minutes">00</span><label>Minutes</label></div>
+    <div class="timer-item"><span id="seconds">00</span><label>Seconds</label></div>
+  </div>
 </div>
-
 
 <div id="intro-flow">
-
-    <div class="bg-orbs">
-        <div class="orb orb1"></div>
-        <div class="orb orb2"></div>
-        <div class="orb orb3"></div>
-    </div>
-
-
-    <section class="screen" id="screen1">
-        <div class="content">
-            <div class="small-title playfair">
-                A little something...
-            </div>
-            <h1 class="intro-title">
-                See This
-            </h1>
-        </div>
-    </section>
-
-
-    <section class="screen" id="screen2">
-        <div class="content">
-            <div class="small-title playfair">
-                This is for
-            </div>
-            <div class="name playfair">
-                YOU
-            </div>
-            <p class="message">
-                This is for you. ❤️
-                <br>
-                Please see this.
-            </p>
-        </div>
-    </section>
-
-
-    <section class="screen" id="screen3">
-        <div class="content">
-            <div class="small-title playfair">
-                Just a little surprise
-            </div>
-            <div class="gif-box">
-                <img
-                    src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJhazRiYmNqcGVzZTF1cGE3MGh2cGt4MXFmcW1leHo1bnlzOTR5NiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/rwIhv4q1hNerNOQS3l/giphy.gif"
-                    alt="Romantic Bear GIF"
-                >
-            </div>
-            <p class="message">
-                Sometimes a small surprise
-                <br>
-                can say what words cannot. ❤️
-            </p>
-        </div>
-    </section>
-
-
-    <section class="screen" id="screen4">
-        <div class="content">
-            <div class="glass-card">
-                <div class="small-title playfair">
-                    What I really want to say
-                </div>
-                <p style="text-align:left;">
-                    I've been talking to you for so long,
-                    and somewhere along the way,
-                    without even realizing it,
-
-                    <span class="highlight">
-                        I fell in love with you.
-                    </span>
-                    <br><br>
-                    Every morning, somehow,
-                    you are the first thought
-                    that comes to me.
-                    <br><br>
-                    I don't know exactly when it happened...
-                    I just know that
-                    <span class="highlight">
-                        you became very special to me.
-                    </span>
-                </p>
-            </div>
-        </div>
-    </section>
-
-
-    <section class="screen" id="screen5">
-        <div class="content">
-            <div class="glass-card">
-                <div class="small-title playfair">
-                    One last question
-                </div>
-                <h2>
-                    Will you be mine? ❤️
-                </h2>
-                <p>
-                    I don't want a perfect story.
-                    <br>
-                    I just want a beautiful story...
-                    <br>
-                    with you in it. ❤️
-                </p>
-
-                <div class="buttons">
-                    <button class="intro-btn yes" onclick="sayYes()">
-                        Yes ❤️
-                    </button>
-                    <button class="intro-btn no" id="noBtn">
-                        No 😶
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
+  <div class="orb one"></div><div class="orb two"></div><div class="orb three"></div>
+  <section class="screen" id="screen1"><div class="content"><div class="kicker">A little something…</div><h1 class="intro-title">Hey You! 💗</h1><p class="message">I made a tiny corner of the internet<br>just to make you smile.</p></div></section>
+  <section class="screen" id="screen2"><div class="content"><div class="kicker">This little surprise is for</div><div class="name">YOU ✨</div><p class="message">Take a deep breath,<br>get comfy, and enjoy this little moment. 🧸</p></div></section>
+  <section class="screen" id="screen3"><div class="content"><div class="kicker">A little dose of cute</div><div class="gif-box"><img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJhazRiYmNqcGVzZTF1cGE3MGh2cGt4MXFmcW1leHo1bnlzOTR5NiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/rwIhv4q1hNerNOQS3l/giphy.gif" alt="Cute animated bear"></div><p class="message">Sometimes the smallest surprise<br>can bring the biggest smile. 🥹</p></div></section>
+  <section class="screen" id="screen4"><div class="content"><div class="glass-card"><div class="kicker">Something from my heart</div><p style="text-align:left">Somewhere along the way, our conversations became little highlights of my day.<br><br><span class="highlight">You became someone genuinely special to me.</span><br><br>I admire your kindness, your laughter, and the little things that make you you. I just wanted you to know that. 💗</p></div></div></section>
+  <section class="screen" id="screen5"><div class="content"><div class="glass-card"><div class="kicker">One little question</div><h2>Would you like to make more happy memories with me? 💕</h2><p>No pressure—just a sweet question from someone who cares about you.</p><div class="buttons"><button class="intro-btn yes" onclick="sayYes()">Yes, let's 💖</button><button class="intro-btn no" id="noBtn">Not now 🙈</button></div></div></div></section>
 </div>
-
-
 
 <div id="main-flow">
-
-    <section class="main-section" id="landing">
-        <h1 style="font-size:clamp(3rem,10vw,4rem); margin-bottom:20px; color:#d6336c; line-height:1.2;">
-            To the Most Beautiful Girl in My World ❤️
-        </h1>
-        <p style="max-width:600px; line-height:1.8;">
-            You said yes...
-            <br>
-            so now let me show you
-            what my heart has been trying to say. ❤️
-        </p>
-        <a href="#beauty" class="main-btn">
-            Open My Heart ❤️
-        </a>
-    </section>
-
-    <section class="main-section" id="beauty">
-        <div class="main-glass">
-            <h2 class="cursive" style="font-size:clamp(2.5rem,8vw,3.5rem); color:#d6336c; margin-bottom:1rem;">
-                Your Beauty
-            </h2>
-            <div id="typewriter-beauty" class="typewriter-text"></div>
-            
-            <div class="cards-container">
-                <div class="beauty-card">
-                    <h3 class="cursive">✨ Her Eyes</h3>
-                    <p>They hold the entire universe. I could get lost in them forever.</p>
-                </div>
-                <div class="beauty-card">
-                    <h3 class="cursive">😊 Her Smile</h3>
-                    <p>Brighter than the morning sun. It heals my soul.</p>
-                </div>
-                <div class="beauty-card">
-                    <h3 class="cursive">❤️ Her Heart</h3>
-                    <p>Pure gold. It's where I found my permanent home.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="main-section" id="voice">
-        <div class="music-notes">🎵 🎶</div>
-        <h2 class="cursive neon-text" style="font-size:clamp(2.5rem,8vw,3.5rem); margin:1rem 0;">
-            Your voice is my favorite melody.
-        </h2>
-        <p style="font-size:1.1rem; line-height:1.6;">
-            Every word you speak feels like music.
-            <br>
-            Even your laughter makes my day beautiful.
-        </p>
-    </section>
-
-
-    <section class="main-section" id="singing">
-        <div style="font-size:4rem; text-shadow:0 0 20px #ff4d6d;">🎤</div>
-        <div id="typewriter-singing" class="typewriter-text" style="margin-top:1.5rem;"></div>
-    </section>
-
-    <section class="main-section" id="little-things">
-        <h2 class="cursive" style="font-size:clamp(3rem,10vw,4rem); color:#d6336c;">
-            The Little Things 💕
-        </h2>
-        <div class="flip-container">
-            <div class="flip-card" onclick="this.classList.toggle('flipped')">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">❤️ The way you say my name</div>
-                    <div class="flip-card-back">It gives me butterflies!</div>
-                </div>
-            </div>
-            <div class="flip-card" onclick="this.classList.toggle('flipped')">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">😊 The way you laugh</div>
-                    <div class="flip-card-back">My favorite sound.</div>
-                </div>
-            </div>
-            <div class="flip-card" onclick="this.classList.toggle('flipped')">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">🙈 The way you get shy</div>
-                    <div class="flip-card-back">You look absolutely adorable.</div>
-                </div>
-            </div>
-            <div class="flip-card" onclick="this.classList.toggle('flipped')">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">☕ The way you care</div>
-                    <div class="flip-card-back">You make me feel safe.</div>
-                </div>
-            </div>
-        </div>
-        <p style="margin-top:15px; font-size:.9rem; color:#555;">(Tap the cards)</p>
-    </section>
-
-    <section class="main-section" id="reasons">
-        <div class="main-glass">
-            <h2 class="cursive" style="font-size:2.5rem;">Reasons I Love You 🌹</h2>
-            <div class="counter-box" id="reason-counter">Reason #1</div>
-            <p id="reason-text" style="font-size:1.2rem; font-weight:600; cursor:pointer;">Your kindness to everyone</p>
-            <p style="font-size:0.8rem; margin-top:15px; color:#555;">(Tap the reason to see more!)</p>
-        </div>
-    </section>
-
-    <section class="main-section" id="letter">
-        <h2 class="cursive" style="font-size:3rem; color:#d6336c;">A Letter For You 💌</h2>
-        <p style="margin-bottom:20px;">Tap the envelope</p>
-        <div class="envelope" onclick="openLetter()">💌</div>
-        
-        <div class="main-glass letter-content cursive" id="letter-content">
-            <strong>My Love,</strong><br><br>
-            I don't know whether words are enough to describe you.<br><br>
-            Every conversation with you becomes my favorite memory.<br><br>
-            You are not just beautiful.<br>
-            You are peaceful.<br>
-            You are kind.<br>
-            You are everything my heart searched for.<br><br>
-            <em>Forever Yours ❤️</em>
-        </div>
-    </section>
-
-    <section class="main-section" id="interactive-heart">
-        <h2 class="cursive" style="font-size:2.5rem;">Tap My Heart ❤️</h2>
-        <div class="big-heart" id="click-heart">❤️</div>
-        <div class="heart-text cursive" id="heart-text-display">I Love You</div>
-    </section>
-
-    <section class="main-section" id="final-scene">
-        <div class="night-sky" id="night-sky">
-            <div class="moon-glow"></div>
-        </div>
-        
-        <div style="position:relative; z-index:10; width:100%; max-width:700px;">
-            <h1 class="cursive glowing-sentence" id="final-text-1">
-                "No matter where life takes us,
-            </h1>
-            <h1 class="cursive glowing-sentence" id="final-text-2" style="margin-top:15px;">
-                I'll always choose you."
-            </h1>
-            <h1 class="cursive glowing-sentence" id="final-text-3" style="margin-top:30px; color:#ff4d6d; font-size:clamp(3rem,10vw,5rem);">
-                I Love You ❤️
-            </h1>
-
-            <div class="final-message">
-                <p>
-                    If you smiled while reading this,
-                    then maybe my little heart finally
-                    reached yours. ❤️
-                </p>
-                <p style="margin-top:12px;">
-                    So if you want to say something to me...
-                    I'm right here. 💕
-                </p>
-
-                <a class="whatsapp-btn" href="https://wa.me/916000276798?text=YES%21%20I%20will%20be%20yours%20forever%21%20%F0%9F%98%8D%E2%9D%A4%EF%B8%8F" target="_blank" rel="noopener noreferrer">
-                    💬 Message Me on WhatsApp ❤️
-                </a>
-            </div>
-
-            <button class="main-btn" style="position:relative; z-index: 20;" onclick="triggerFinale()">
-                Forever Together ❤️
-            </button>
-        </div>
-    </section>
+  <section class="main-section" id="landing"><div class="main-glass"><h1 class="hero-title">A Little Love Note<br>For You 💗</h1><p style="line-height:1.8">You said yes… and now here's a little collection of the things I wanted to say. Take your time. 🌷</p><a href="#beauty" class="main-btn">Open my heart 💌</a></div></section>
+  <section class="main-section" id="beauty"><div class="main-glass"><h2 class="cursive-title">Things I Adore ✨</h2><div id="typewriter-beauty" class="typewriter-text"></div><div class="cards-container"><div class="beauty-card"><h3>🌟 Your kindness</h3><p>The way you care about people makes the world feel softer.</p></div><div class="beauty-card"><h3>😊 Your smile</h3><p>A little smile from you can brighten an ordinary day.</p></div><div class="beauty-card"><h3>💗 Your heart</h3><p>Your thoughtful little moments are what make you special.</p></div></div></div></section>
+  <section class="main-section" id="voice"><div class="music-notes">🎵 🎶 🎵</div><h2 class="cursive-title neon-text" style="color:#ffd1e4">Your voice is a lovely melody.</h2><p style="line-height:1.8">Your stories, your laughter, and even your random little updates make conversations feel special. 🎧</p></section>
+  <section class="main-section" id="singing"><div style="font-size:4rem">🎤</div><div id="typewriter-singing" class="typewriter-text" style="margin-top:22px"></div><p style="margin-top:18px">A tiny song-shaped compliment, just for you. 💕</p></section>
+  <section class="main-section" id="little-things"><div class="main-glass"><h2 class="cursive-title">The Little Things 🧸</h2><div class="flip-container"><div class="flip-card" tabindex="0" role="button" aria-label="Flip card" onclick="flipCard(this)" onkeydown="cardKey(event,this)"><div class="flip-card-inner"><div class="flip-card-front">💬 The way you tell stories</div><div class="flip-card-back">I love hearing your little updates.</div></div></div><div class="flip-card" tabindex="0" role="button" aria-label="Flip card" onclick="flipCard(this)" onkeydown="cardKey(event,this)"><div class="flip-card-inner"><div class="flip-card-front">😊 Your laugh</div><div class="flip-card-back">It makes ordinary moments brighter.</div></div></div><div class="flip-card" tabindex="0" role="button" aria-label="Flip card" onclick="flipCard(this)" onkeydown="cardKey(event,this)"><div class="flip-card-inner"><div class="flip-card-front">🌷 Your thoughtfulness</div><div class="flip-card-back">Those small caring things matter.</div></div></div><div class="flip-card" tabindex="0" role="button" aria-label="Flip card" onclick="flipCard(this)" onkeydown="cardKey(event,this)"><div class="flip-card-inner"><div class="flip-card-front">✨ Just being you</div><div class="flip-card-back">That is already pretty wonderful.</div></div></div></div><p style="margin-top:14px;font-size:.9rem">(Tap a card to flip it 💗)</p></div></section>
+  <section class="main-section" id="reasons"><div class="main-glass"><h2 class="cursive-title">A Few Reasons 🌹</h2><div class="counter-box" id="reason-counter" role="button" tabindex="0">Reason 1 of 6</div><p id="reason-text">Your kindness to the people around you.</p><p style="font-size:.85rem;margin-top:14px">(Tap to see another reason)</p></div></section>
+  <section class="main-section" id="letter"><h2 class="cursive-title">A Little Letter 💌</h2><p style="margin-bottom:15px">Tap the envelope to open it</p><button class="envelope" onclick="openLetter()" aria-label="Open letter" style="background:none;border:0">💌</button><div class="main-glass letter-content cursive" id="letter-content"><strong>Hey you,</strong><br><br>I may not always find the perfect words, but I hope this little page made you smile.<br><br>Thank you for your kindness, your conversations, and the small moments that become happy memories.<br><br>Keep being your lovely, wonderful self. You deserve kindness, joy, and all the good things life can bring.<br><br><em>Sending you a little happiness 💗</em></div></section>
+  <section class="main-section" id="interactive-heart"><div class="main-glass"><h2 class="cursive-title">Tap the Heart 💖</h2><button class="big-heart" id="click-heart" aria-label="Tap heart" style="border:0;background:none">💗</button><div class="heart-text" id="heart-text-display">You make people smile</div><p style="margin-top:10px;font-size:.9rem">Tap for another tiny message ✨</p></div></section>
+  <section class="main-section" id="final-scene"><div class="night-sky" id="night-sky"><div class="moon-glow"></div></div><div class="final-content"><h1 class="glowing-sentence" id="final-text-1">May life bring you<br>lots of little joys…</h1><h1 class="glowing-sentence" id="final-text-2" style="margin-top:16px">and people who care<br>about your happiness. 🌙</h1><h1 class="glowing-sentence" id="final-text-3" style="margin-top:28px;color:#ff91bd">Keep shining, you. 💗</h1><div class="final-message"><p>If this made you smile even a little,<br>then my tiny surprise did its job. 🥹</p><p style="margin-top:12px">Feel free to send me a little hello. 💕</p></div><button class="main-btn" onclick="triggerFinale()">A little confetti, please 🎉</button></div></section>
 </div>
+<div id="particles-container" aria-hidden="true"></div>
 
-<!-- =====================================================
-   JAVASCRIPT (All Logic added here)
-===================================================== -->
 <script>
-    // 1. COUNTDOWN LOGIC
-    const targetDate = new Date("September 30, 2026 23:59:00").getTime();
+"use strict";
+// Change this date if you want a different unlock moment.
+// The date is in the visitor's local time. Since Sep 30, 2026 has passed,
+// this page will unlock immediately for visitors opening it now.
+const unlockAt = new Date(2026, 8, 30, 23, 59, 0).getTime();
+let introStarted = false;
+let starsCreated = false;
+let observer = null;
+let timerInterval = null;
 
-    const timerInterval = setInterval(function() {
-        const now = new Date().getTime();
-        const distance = targetDate - now;
+const $ = id => document.getElementById(id);
+function updateCountdown(){
+  const distance = unlockAt - Date.now();
+  if(distance <= 0){
+    clearInterval(timerInterval);
+    $("timer-screen").style.display = "none";
+    startIntroFlow();
+    return;
+  }
+  $("days").textContent = String(Math.floor(distance / 86400000)).padStart(2,"0");
+  $("hours").textContent = String(Math.floor(distance % 86400000 / 3600000)).padStart(2,"0");
+  $("minutes").textContent = String(Math.floor(distance % 3600000 / 60000)).padStart(2,"0");
+  $("seconds").textContent = String(Math.floor(distance % 60000 / 1000)).padStart(2,"0");
+}
+timerInterval = setInterval(updateCountdown,1000);
+updateCountdown();
 
-        if (distance <= 0) {
-            clearInterval(timerInterval);
-            document.getElementById("timer-screen").style.display = "none";
-            startIntroFlow();
-            return;
-        }
-
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        document.getElementById("days").innerText = days.toString().padStart(2, '0');
-        document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
-        document.getElementById("minutes").innerText = minutes.toString().padStart(2, '0');
-        document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
-    }, 1000);
-
-    /* 
-       --- TESTING OVERRIDE --- 
-       If you want to view the site right now without waiting until Sept 30, 2026,
-       uncomment the next two lines below to bypass the timer screen!
-    */
-    // document.getElementById("timer-screen").style.display = "none";
-    // startIntroFlow();
-
-
-    // 2. INTRO FLOW ANIMATIONS
-    function startIntroFlow() {
-        const introFlow = document.getElementById("intro-flow");
-        introFlow.style.display = "block";
-
-        const screens = [
-            document.getElementById("screen1"),
-            document.getElementById("screen2"),
-            document.getElementById("screen3"),
-            document.getElementById("screen4"),
-            document.getElementById("screen5")
-        ];
-
-        let current = 0;
-
-        function showNextScreen() {
-            if (current > 0) {
-                screens[current - 1].classList.remove("active");
-            }
-            if (current < screens.length) {
-                screens[current].classList.add("active");
-                
-                // Set timings for how long each screen shows before the next one appears
-                let delay = 3500; // default 3.5 seconds
-                if (current === 1) delay = 4500; 
-                if (current === 2) delay = 5000;
-                if (current === 3) delay = 7000; 
-                
-                // Only auto-advance if it's NOT the last screen (buttons need to be clicked)
-                if (current < screens.length - 1) {
-                    setTimeout(() => {
-                        current++;
-                        showNextScreen();
-                    }, delay);
-                }
-            }
-        }
-        
-        // Slight delay before the first screen appears
-        setTimeout(showNextScreen, 200); 
+function startIntroFlow(){
+  if(introStarted) return;
+  introStarted = true;
+  $("intro-flow").style.display = "block";
+  const screens = [...document.querySelectorAll("#intro-flow .screen")];
+  const delays = [2800,3200,3800,5200];
+  let current = 0;
+  const show = () => {
+    screens.forEach((screen,i)=>screen.classList.toggle("active",i===current));
+    if(current < screens.length - 1){
+      setTimeout(()=>{current++;show();},delays[current-1] || 3500);
     }
+  };
+  setTimeout(show,180);
+}
 
+// Gentle floating hearts, created only after the visitor interacts.
+function floatHeart(){
+  const heart=document.createElement("span");
+  heart.className="heart-float";
+  heart.textContent=["💗","💕","🌸","✨","💖"][Math.floor(Math.random()*5)];
+  heart.style.left=Math.random()*95+"vw";
+  heart.style.setProperty("--move",(Math.random()*100-50)+"px");
+  heart.style.setProperty("--duration",(4+Math.random()*3)+"s");
+  heart.style.fontSize=(16+Math.random()*18)+"px";
+  $("particles-container").appendChild(heart);
+  setTimeout(()=>heart.remove(),7500);
+}
+function burst(count=80){
+  if(typeof confetti==="function"){
+    confetti({particleCount:count,spread:65,origin:{y:.65},colors:["#ff5c9a","#ffb3d5","#9b5cff","#ffd166"]});
+  }
+}
+function sayYes(){
+  $("intro-flow").style.display="none";
+  $("main-flow").style.display="block";
+  burst(130);
+  typeWriter("typewriter-beauty","You are wonderful in all the little ways that make you who you are. I hope you never forget how much kindness and joy you bring into the world. 💗",28);
+  typeWriter("typewriter-singing","If happiness had a soundtrack, it would be made of warm conversations, silly laughs, and the little stories we share. 🎶",28);
+  generateStars();
+  setupFinalSceneObserver();
+  setTimeout(floatHeart,400);
+}
+const noBtn=$("noBtn");
+function moveNoBtn(){
+  const parent=noBtn.parentElement;
+  const maxX=Math.max(0,parent.clientWidth-noBtn.offsetWidth-12);
+  const maxY=Math.max(0,Math.min(180,window.innerHeight*.25));
+  noBtn.style.position="relative";
+  noBtn.style.left=(Math.random()*maxX-maxX/2)+"px";
+  noBtn.style.top=(Math.random()*maxY-maxY/2)+"px";
+  noBtn.textContent=["🙈 Not now?","Hehe, try again 💗","One more click? 🌸"][Math.floor(Math.random()*3)];
+}
+noBtn.addEventListener("pointerenter",moveNoBtn);
+noBtn.addEventListener("touchstart",e=>{e.preventDefault();moveNoBtn();},{passive:false});
 
-    // 3. NO BUTTON RUNNING AWAY LOGIC
-    const noBtn = document.getElementById("noBtn");
-    function moveNoBtn() {
-        const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 30);
-        const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 30);
-        noBtn.style.position = "absolute";
-        noBtn.style.left = `${Math.max(10, x)}px`;
-        noBtn.style.top = `${Math.max(10, y)}px`;
-    }
-    noBtn.addEventListener("mouseover", moveNoBtn);
-    noBtn.addEventListener("touchstart", moveNoBtn);
-
-
-    // 4. YES BUTTON LOGIC
-    function sayYes() {
-        // Shoot confetti!
-        confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
-        
-        // Hide intro, show main flow
-        document.getElementById("intro-flow").style.display = "none";
-        document.getElementById("main-flow").style.display = "block";
-        
-        // Start typing effects for the sections
-        typeWriter('typewriter-beauty', "You are beautiful not just on the outside, but your soul is breathtaking. Every little detail about you is pure art.", 50);
-        typeWriter('typewriter-singing', "I could listen to you hum, sing, or just talk about your day, and it would be my absolute favorite soundtrack.", 50);
-        
-        // Initialize background stars
-        generateStars();
-        // Setup observer for final scene scroll animations
-        setupFinalSceneObserver();
-    }
-
-
-    // 5. TYPEWRITER EFFECT
-    function typeWriter(elementId, text, speed) {
-        let i = 0;
-        const el = document.getElementById(elementId);
-        el.innerHTML = '';
-        function type() {
-            if (i < text.length) {
-                el.innerHTML += text.charAt(i);
-                i++;
-                setTimeout(type, speed);
-            } else {
-                el.style.borderRight = "none"; // Remove blinking cursor when done
-            }
-        }
-        // Small delay to ensure the section is visible before it starts typing
-        setTimeout(type, 1000); 
-    }
-
-
-    // 6. REASONS CYCLER
-    const reasonsArray = [
-        "Your kindness to everyone",
-        "The way your eyes crinkle when you smile",
-        "Your incredible sense of humor",
-        "How safe I feel when talking to you",
-        "Your beautiful and passionate heart",
-        "Everything about you, honestly."
-    ];
-    let reasonIndex = 0;
-    const reasonBox = document.getElementById("reason-counter");
-    const reasonText = document.getElementById("reason-text");
-
-    function nextReason() {
-        reasonIndex = (reasonIndex + 1) % reasonsArray.length;
-        reasonBox.innerText = `Reason #${reasonIndex + 1}`;
-        reasonText.innerText = reasonsArray[reasonIndex];
-        confetti({ particleCount: 30, spread: 40, origin: { y: 0.8 }, colors: ['#ff4d6d', '#ff758c'] });
-    }
-    reasonBox.addEventListener("click", nextReason);
-    reasonText.addEventListener("click", nextReason);
-
-
-    // 7. OPEN LETTER LOGIC
-    function openLetter() {
-        document.querySelector(".envelope").style.display = "none";
-        document.getElementById("letter-content").style.display = "block";
-        confetti({ particleCount: 100, spread: 60, origin: { y: 0.7 } });
-    }
-
-
-    // 8. INTERACTIVE HEART LOGIC
-    const heartPhrases = ["I Love You", "You're My Everything", "Forever Yours", "My Sweetheart", "My Angel"];
-    let phraseIndex = 0;
-    document.getElementById("click-heart").addEventListener("click", () => {
-        phraseIndex = (phraseIndex + 1) % heartPhrases.length;
-        document.getElementById("heart-text-display").innerText = heartPhrases[phraseIndex];
-        confetti({ particleCount: 20, spread: 30, colors: ['#ff0000', '#ff4d6d'] });
+function typeWriter(id,text,speed=30){
+  const el=$(id);el.textContent="";el.style.borderRight="2px solid #ff4d6d";
+  let i=0;
+  function step(){
+    if(i<text.length){el.textContent+=text.charAt(i++);setTimeout(step,speed);}
+    else el.style.borderRight="none";
+  }
+  setTimeout(step,450);
+}
+const reasons=["Your kindness to the people around you.","The way you make ordinary conversations fun.","Your thoughtful little gestures.","Your laugh and cheerful energy.","The way you listen and care.","Simply being your own wonderful self. 💗"];
+let reasonIndex=0;
+function nextReason(){
+  reasonIndex=(reasonIndex+1)%reasons.length;
+  $("reason-counter").textContent=`Reason ${reasonIndex+1} of ${reasons.length}`;
+  $("reason-text").textContent=reasons[reasonIndex];
+  burst(24);floatHeart();
+}
+$("reason-counter").addEventListener("click",nextReason);
+$("reason-text").addEventListener("click",nextReason);
+$("reason-counter").addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();nextReason();}});
+function openLetter(){
+  $("letter-content").style.display="block";
+  document.querySelector(".envelope").style.display="none";
+  burst(70);floatHeart();
+}
+function flipCard(card){card.classList.toggle("flipped");}
+function cardKey(e,card){if(e.key==="Enter"||e.key===" "){e.preventDefault();flipCard(card);}}
+const heartPhrases=["You make people smile 💗","You deserve lovely things 🌷","Sending a little sunshine ☀️","You are appreciated 🧸","Keep shining ✨"];
+let phraseIndex=0;
+$("click-heart").addEventListener("click",()=>{
+  phraseIndex=(phraseIndex+1)%heartPhrases.length;
+  $("heart-text-display").textContent=heartPhrases[phraseIndex];
+  burst(20);floatHeart();
+});
+function generateStars(){
+  if(starsCreated)return;starsCreated=true;
+  const sky=$("night-sky");
+  for(let i=0;i<45;i++){
+    const star=document.createElement("span");star.className="css-star";
+    const size=Math.random()*3+1;star.style.width=size+"px";star.style.height=size+"px";
+    star.style.left=Math.random()*100+"%";star.style.top=Math.random()*100+"%";
+    star.style.setProperty("--duration",(1.5+Math.random()*3)+"s");sky.appendChild(star);
+  }
+}
+function setupFinalSceneObserver(){
+  if(observer)observer.disconnect();
+  observer=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        ["final-text-1","final-text-2","final-text-3"].forEach((id,i)=>setTimeout(()=>$(id).classList.add("visible"),500+i*1300));
+      }
     });
-
-
-    // 9. FINAL SCENE EFFECTS (Scroll trigger & Stars)
-    function setupFinalSceneObserver() {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // Fade in sentences progressively
-                    setTimeout(() => document.getElementById("final-text-1").classList.add("visible"), 500);
-                    setTimeout(() => document.getElementById("final-text-2").classList.add("visible"), 2000);
-                    setTimeout(() => document.getElementById("final-text-3").classList.add("visible"), 3500);
-                }
-            });
-        }, { threshold: 0.4 });
-        
-        observer.observe(document.getElementById("final-scene"));
-    }
-
-    function generateStars() {
-        const nightSky = document.getElementById("night-sky");
-        for (let i = 0; i < 40; i++) {
-            let star = document.createElement("div");
-            star.classList.add("css-star");
-            star.style.width = (Math.random() * 3 + 1) + "px";
-            star.style.height = star.style.width;
-            star.style.left = (Math.random() * 100) + "%";
-            star.style.top = (Math.random() * 100) + "%";
-            star.style.setProperty('--duration', (Math.random() * 3 + 1) + "s");
-            nightSky.appendChild(star);
-        }
-    }
-
-    // 10. FINALE CONFETTI BOMB
-    function triggerFinale() {
-        const duration = 3 * 1000;
-        const animationEnd = Date.now() + duration;
-        const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
-
-        function randomInRange(min, max) {
-            return Math.random() * (max - min) + min;
-        }
-
-        const interval = setInterval(function() {
-            const timeLeft = animationEnd - Date.now();
-            if (timeLeft <= 0) {
-                return clearInterval(interval);
-            }
-            const particleCount = 50 * (timeLeft / duration);
-            confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
-            confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
-        }, 250);
-    }
+  },{threshold:.25});
+  observer.observe($("final-scene"));
+}
+function triggerFinale(){
+  if(typeof confetti!=="function")return;
+  const duration=2200,end=Date.now()+duration;
+  const interval=setInterval(()=>{
+    const left=end-Date.now();if(left<=0){clearInterval(interval);return;}
+    const count=35*(left/duration);
+    confetti({particleCount:count,spread:360,startVelocity:25,ticks:55,origin:{x:Math.random()*.25+.05,y:Math.random()*.3}});
+    confetti({particleCount:count,spread:360,startVelocity:25,ticks:55,origin:{x:Math.random()*.25+.7,y:Math.random()*.3}});
+  },220);
+}
+setInterval(floatHeart,3200);
 </script>
-
 </body>
 </html>
